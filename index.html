@@ -211,15 +211,13 @@
     background: var(--paper-dim); border: 1px solid var(--line); border-radius: 4px; overflow:hidden;
   }
   .coming-soon-art{
-    position:relative; min-height: 260px; background: var(--paper-dim-2);
+    position:relative; min-height: 320px; background: var(--paper-dim-2);
+    display:flex; align-items:center; justify-content:center; padding: clamp(28px,4vw,44px);
   }
-  .shelf{ position:absolute; inset:0; display:flex; align-items:flex-end; gap: 10px; padding: clamp(24px,4vw,40px); }
-  .shelf span{ flex:1; border-radius: 2px; border: 1.5px dashed var(--line); background: color-mix(in srgb, var(--paper) 55%, transparent); }
-  .shelf span:nth-child(1){ height: 46%; }
-  .shelf span:nth-child(2){ height: 78%; border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); }
-  .shelf span:nth-child(3){ height: 30%; }
-  .shelf span:nth-child(4){ height: 62%; }
-  .shelf span:nth-child(5){ height: 40%; }
+  .cover-shot{
+    max-height: min(380px, 60vh); width:auto; max-width:100%;
+    box-shadow: 0 26px 54px var(--shadow); border-radius: 2px;
+  }
   .coming-soon-body{ padding: clamp(28px,4vw,48px) clamp(24px,4vw,44px) clamp(28px,4vw,48px) 0; display:flex; flex-direction:column; justify-content:center; }
   .coming-soon-body h3{ font-family:var(--font-display); font-weight:500; font-size: clamp(1.3rem,2vw,1.7rem); margin: .3em 0 .5em; }
   .coming-soon-body p{ color: var(--ink-soft); max-width: 42ch; }
@@ -365,18 +363,18 @@
     <div class="wrap">
       <div class="section-head reveal">
         <span class="kicker">First List</span>
-        <h2>Nothing in print yet — and that's the point.</h2>
-        <p>Aorael launched in 2026. We're reading now and acquiring our first list, taking the time most manuscripts don't get. The first titles will appear here the moment they're signed.</p>
+        <h2>Nothing in print yet — but the first spine is chosen.</h2>
+        <p>Aorael launched in 2026. We're still reading and acquiring the rest of our first list, taking the time most manuscripts don't get — but here's the cover we've already signed.</p>
       </div>
       <div class="coming-soon reveal">
         <div class="coming-soon-art">
-          <div class="shelf" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+          <img class="cover-shot" src="book-how-to-foresee-the-future.jpg" alt="Cover of How to Foresee the Future by Hwangbo Wonju" loading="lazy" decoding="async">
         </div>
         <div class="coming-soon-body">
-          <span class="kicker">Status</span>
-          <h3>Currently acquiring</h3>
-          <p>No titles are confirmed yet — we're reading agented submissions and manuscripts from our open call. If you're the one we sign, this shelf gets its first spine.</p>
-          <a class="btn btn-solid" href="#submissions">See what we're looking for</a>
+          <span class="kicker">Forthcoming — Nonfiction</span>
+          <h3>How to Foresee the Future</h3>
+          <p>Our first acquisition is a futures-studies primer: a clear-headed guide to reading the trends already shaping tomorrow — climate, public health, the Fourth Industrial Revolution, resources and energy, education, work, gender, and the long tail of the pandemic. Written by Hwangbo Wonju, adjunct professor of convergence content at Ewha Womans University, it's less a set of predictions than a toolkit — the habits of analysis that let a reader see what's coming instead of just reacting to it. English edition in progress.</p>
+          <a class="btn btn-solid" href="#submissions">See what we're looking for next</a>
         </div>
       </div>
     </div>
