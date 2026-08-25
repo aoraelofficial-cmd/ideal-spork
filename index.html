@@ -176,6 +176,7 @@
 
   /* ---------- Sections generic ---------- */
   section{ padding: clamp(64px,9vw,120px) 0; }
+  #news, #culture-news{ padding: clamp(32px,4vw,56px) 0; }
   .section-head{ max-width: 62ch; margin-bottom: clamp(36px,5vw,64px); }
   .kicker{
     display:block; font-size:0.78rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
@@ -333,6 +334,7 @@
     <li><a href="#titles">First List</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#news">News</a></li>
+    <li><a href="#culture-news">Culture</a></li>
     <li><a href="#process">Process</a></li>
     <li><a href="#submissions">Submissions</a></li>
   </ul>
@@ -376,11 +378,26 @@
   <section id="news">
     <div class="wrap">
       <div class="section-head reveal">
+        <span class="kicker">신간 소개</span>
+        <h2>지금, 서점에 도착한 이야기들.</h2>
+        <p>소설·시·희곡 카테고리의 따끈한 신간 모음입니다. 관심 있는 책 카드를 누르면 알라딘 상세 페이지로 연결됩니다.</p>
+      </div>
+      <div class="news-grid reveal" id="newsGrid">
+        <div class="news-card news-skel"><div class="news-card-thumb"></div><div class="news-card-body"><span class="src">알라딘 · 신간</span><h4>불러오는 중...</h4><span class="date">&nbsp;</span></div></div>
+        <div class="news-card news-skel"><div class="news-card-thumb"></div><div class="news-card-body"><span class="src">알라딘 · 신간</span><h4>불러오는 중...</h4><span class="date">&nbsp;</span></div></div>
+        <div class="news-card news-skel"><div class="news-card-thumb"></div><div class="news-card-body"><span class="src">알라딘 · 신간</span><h4>불러오는 중...</h4><span class="date">&nbsp;</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="culture-news">
+    <div class="wrap">
+      <div class="section-head reveal">
         <span class="kicker">In the News</span>
         <h2>Culture, as it happens.</h2>
         <p>연합뉴스 문화 섹션의 최신 소식을 큐레이션했습니다. 카드를 클릭하면 연합뉴스 원문 기사로 이동합니다.</p>
       </div>
-      <div class="news-grid reveal" id="newsGrid">
+      <div class="news-grid reveal" id="cultureNewsGrid">
         <div class="news-card news-skel"><div class="news-card-thumb"></div><div class="news-card-body"><span class="src">연합뉴스 · 문화</span><h4>불러오는 중...</h4><span class="date">&nbsp;</span></div></div>
         <div class="news-card news-skel"><div class="news-card-thumb"></div><div class="news-card-body"><span class="src">연합뉴스 · 문화</span><h4>불러오는 중...</h4><span class="date">&nbsp;</span></div></div>
         <div class="news-card news-skel"><div class="news-card-thumb"></div><div class="news-card-body"><span class="src">연합뉴스 · 문화</span><h4>불러오는 중...</h4><span class="date">&nbsp;</span></div></div>
@@ -614,9 +631,58 @@
 
 <script>
 (function(){
-  var FEED_URL = 'https://www.yna.co.kr/rss/culture.xml';
+  var FEED_URL = 'http://www.aladin.co.kr/rss/special_new/1';
   var API = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(FEED_URL);
   var grid = document.getElementById('newsGrid');
+  if(!grid) return;
+
+  function fmtDate(pubDate){
+    try{
+      var d = new Date(pubDate);
+      var y = d.getFullYear(), m = ('0'+(d.getMonth()+1)).slice(-2), day = ('0'+d.getDate()).slice(-2);
+      return y + '.' + m + '.' + day;
+    }catch(e){ return ''; }
+  }
+
+  fetch(API)
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      if(!data.items || !data.items.length) throw new Error('empty feed');
+      var items = data.items.slice(0,3);
+      grid.innerHTML = items.map(function(item){
+        var title = (item.title || '').replace(/</g,'&lt;');
+        var link = item.link || '#';
+        var date = fmtDate(item.pubDate);
+        var thumb = item.thumbnail || (item.enclosure && item.enclosure.link) || '';
+        var thumbHtml = thumb
+          ? '<img class="news-card-thumb" src="' + thumb + '" alt="" loading="lazy" decoding="async">'
+          : '<div class="news-card-thumb"></div>';
+        return '<a class="news-card" href="' + link + '" target="_blank" rel="noopener">' +
+               thumbHtml +
+               '<div class="news-card-body">' +
+               '<span class="src">알라딘 · 신간</span>' +
+               '<h4>' + title + '</h4>' +
+               '<span class="date">' + date + '</span>' +
+               '</div>' +
+               '</a>';
+      }).join('');
+    })
+    .catch(function(err){
+      grid.innerHTML = '<a class="news-card" href="https://www.aladin.co.kr/shop/common/wnew.aspx?BranchType=1&CID=1" target="_blank" rel="noopener">' +
+        '<div class="news-card-thumb"></div><div class="news-card-body"><span class="src">알라딘 · 신간</span><h4>최신 신간 소식 보러가기</h4><span class="date">aladin.co.kr</span></div></a>' +
+        '<a class="news-card" href="https://www.aladin.co.kr/shop/common/wnew.aspx?BranchType=1&CID=1" target="_blank" rel="noopener">' +
+        '<div class="news-card-thumb"></div><div class="news-card-body"><span class="src">알라딘 · 신간</span><h4>목록 새로고침이 필요할 수 있습니다</h4><span class="date">&nbsp;</span></div></a>' +
+        '<a class="news-card" href="https://www.aladin.co.kr/shop/common/wnew.aspx?BranchType=1&CID=1" target="_blank" rel="noopener">' +
+        '<div class="news-card-thumb"></div><div class="news-card-body"><span class="src">알라딘 · 신간</span><h4>전체 신간 &rarr;</h4><span class="date">&nbsp;</span></div></a>';
+    });
+})();
+</script>
+
+<script>
+(function(){
+  var FEED_URL = 'https://www.yna.co.kr/rss/culture.xml';
+  var API = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(FEED_URL);
+  var grid = document.getElementById('cultureNewsGrid');
   if(!grid) return;
 
   function fmtDate(pubDate){
