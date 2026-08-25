@@ -307,6 +307,18 @@
     section{ padding: clamp(48px,10vw,80px) 0; }
     .brand img{ height: 52px; }
   }
+
+  .news-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap: clamp(20px,3vw,30px); }
+  .news-card{ display:block; border:1px solid var(--line); border-radius:10px; overflow:hidden; text-decoration:none; color:inherit; transition: box-shadow .2s, transform .2s; }
+  .news-card-body{ padding: clamp(18px,3vw,24px); }
+  .news-card-thumb{ width:100%; aspect-ratio: 16/9; object-fit:cover; display:block; background: var(--line, #eee); }
+  .news-card:hover{ box-shadow: 0 8px 24px rgba(0,0,0,.08); transform: translateY(-2px); }
+  .news-card .src{ font-size:.78rem; letter-spacing:.06em; text-transform:uppercase; color: var(--ink-soft); }
+  .news-card h4{ font-family:var(--font-display); font-weight:500; font-size:1.08rem; margin:.5em 0 .4em; line-height:1.4; }
+  .news-card .date{ font-size:.82rem; color: var(--ink-soft); }
+  @media (max-width:760px){ .news-grid{ grid-template-columns: 1fr; } }
+
+  .news-skel h4{ color: var(--ink-soft); font-weight:400; }
 </style>
 </head>
 <body>
@@ -320,6 +332,7 @@
   <ul class="nav-links" id="navLinks">
     <li><a href="#titles">First List</a></li>
     <li><a href="#about">About</a></li>
+    <li><a href="#news">News</a></li>
     <li><a href="#process">Process</a></li>
     <li><a href="#submissions">Submissions</a></li>
   </ul>
@@ -359,6 +372,22 @@
     </div>
   </section>
 
+
+  <section id="news">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="kicker">In the News</span>
+        <h2>Culture, as it happens.</h2>
+        <p>연합뉴스 문화 섹션의 최신 소식을 큐레이션했습니다. 카드를 클릭하면 연합뉴스 원문 기사로 이동합니다.</p>
+      </div>
+      <div class="news-grid reveal" id="newsGrid">
+        <div class="news-card news-skel"><div class="news-card-thumb"></div><div class="news-card-body"><span class="src">연합뉴스 · 문화</span><h4>불러오는 중...</h4><span class="date">&nbsp;</span></div></div>
+        <div class="news-card news-skel"><div class="news-card-thumb"></div><div class="news-card-body"><span class="src">연합뉴스 · 문화</span><h4>불러오는 중...</h4><span class="date">&nbsp;</span></div></div>
+        <div class="news-card news-skel"><div class="news-card-thumb"></div><div class="news-card-body"><span class="src">연합뉴스 · 문화</span><h4>불러오는 중...</h4><span class="date">&nbsp;</span></div></div>
+      </div>
+    </div>
+  </section>
+
   <section id="process">
     <div class="wrap">
       <div class="section-head reveal">
@@ -368,18 +397,18 @@
       <div class="process-list">
         <div class="process-item reveal">
           <span class="num">01</span>
-          <h3>Reading</h3>
-          <p>We read every agented submission and roughly a third of what arrives during our open call. Most manuscripts get a decision within twelve weeks.</p>
+          <h3>투고 검토</h3>
+          <p>에이전트를 통한 투고는 전량 검토하며, 공개 투고 기간에 들어온 원고는 약 3분의 1을 검토합니다. 대부분의 원고는 12주 이내에 결과를 안내드립니다.</p>
         </div>
         <div class="process-item reveal">
           <span class="num">02</span>
-          <h3>Edit</h3>
-          <p>Two structural passes and a full line edit, worked through directly with the author — not tracked changes disappearing into a shared drive.</p>
+          <h3>편집</h3>
+          <p>두 차례의 구조 편집과 한 차례의 전체 문장 교정을 거치며, 공유 드라이브에 흔적 없이 남는 변경 기록이 아니라 작가와 직접 소통하며 진행합니다.</p>
         </div>
         <div class="process-item reveal">
           <span class="num">03</span>
-          <h3>Design &amp; Print</h3>
-          <p>Covers are designed in-house. First runs are offset-printed in small batches; reprints follow demand rather than a fixed schedule.</p>
+          <h3>디자인 &amp; 인쇄</h3>
+          <p>표지는 사내에서 직접 디자인합니다. 초판은 소량 오프셋 인쇄로 제작하며, 재쇄는 정해진 일정이 아니라 수요에 따라 진행됩니다.</p>
         </div>
       </div>
     </div>
@@ -580,6 +609,55 @@
   var mq = window.matchMedia('(prefers-color-scheme: dark)');
   (mq.addEventListener ? mq.addEventListener('change', applyTheme) : mq.addListener(applyTheme));
   new MutationObserver(applyTheme).observe(document.documentElement, { attributes:true, attributeFilter:['data-theme'] });
+})();
+</script>
+
+<script>
+(function(){
+  var FEED_URL = 'https://www.yna.co.kr/rss/culture.xml';
+  var API = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(FEED_URL);
+  var grid = document.getElementById('newsGrid');
+  if(!grid) return;
+
+  function fmtDate(pubDate){
+    try{
+      var d = new Date(pubDate);
+      var y = d.getFullYear(), m = ('0'+(d.getMonth()+1)).slice(-2), day = ('0'+d.getDate()).slice(-2);
+      return y + '.' + m + '.' + day;
+    }catch(e){ return ''; }
+  }
+
+  fetch(API)
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      if(!data.items || !data.items.length) throw new Error('empty feed');
+      var items = data.items.slice(0,3);
+      grid.innerHTML = items.map(function(item){
+        var title = (item.title || '').replace(/</g,'&lt;');
+        var link = item.link || '#';
+        var date = fmtDate(item.pubDate);
+        var thumb = item.thumbnail || (item.enclosure && item.enclosure.link) || '';
+        var thumbHtml = thumb
+          ? '<img class="news-card-thumb" src="' + thumb + '" alt="" loading="lazy" decoding="async">'
+          : '<div class="news-card-thumb"></div>';
+        return '<a class="news-card" href="' + link + '" target="_blank" rel="noopener">' +
+               thumbHtml +
+               '<div class="news-card-body">' +
+               '<span class="src">연합뉴스 · 문화</span>' +
+               '<h4>' + title + '</h4>' +
+               '<span class="date">' + date + '</span>' +
+               '</div>' +
+               '</a>';
+      }).join('');
+    })
+    .catch(function(err){
+      grid.innerHTML = '<a class="news-card" href="https://www.yna.co.kr/culture/all" target="_blank" rel="noopener">' +
+        '<div class="news-card-thumb"></div><div class="news-card-body"><span class="src">연합뉴스 · 문화</span><h4>최신 문화 뉴스 보러가기</h4><span class="date">yna.co.kr</span></div></a>' +
+        '<a class="news-card" href="https://www.yna.co.kr/culture/all" target="_blank" rel="noopener">' +
+        '<div class="news-card-thumb"></div><div class="news-card-body"><span class="src">연합뉴스 · 문화</span><h4>기사 목록 새로고침이 필요할 수 있습니다</h4><span class="date">&nbsp;</span></div></a>' +
+        '<a class="news-card" href="https://www.yna.co.kr/culture/all" target="_blank" rel="noopener">' +
+        '<div class="news-card-thumb"></div><div class="news-card-body"><span class="src">연합뉴스 · 문화</span><h4>전체 문화 뉴스 &rarr;</h4><span class="date">&nbsp;</span></div></a>';
+    });
 })();
 </script>
 </body>
