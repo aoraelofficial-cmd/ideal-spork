@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Aorael Books</title>
-<meta name="description" content="Aorael Books is a new independent press in Seoul. First title out now: How to Foresee the Future with AI by Wonju Hwangbo — with literary fiction, essays, and fiction in translation to follow.">
+<meta name="description" content="Aorael Books is a new independent press in Seoul. Explore our Korean and English titles and preview our upcoming climate science book.">
 <meta name="theme-color" content="#F7F3EA" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#121010" media="(prefers-color-scheme: dark)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -375,6 +375,25 @@
     section{ padding: clamp(48px,10vw,80px) 0; }
     .brand img{ height: 52px; }
   }
+
+  [lang="ko"]{font-family:system-ui,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;word-break:keep-all;overflow-wrap:anywhere}
+  [lang="ko"] h2,[lang="ko"] h3{font-family:inherit}
+  #new-release,#titles{scroll-margin-top:80px}
+  .edition{font-weight:700;font-size:.85rem;letter-spacing:.04em;color:inherit;margin:.65rem 0}
+  .preview-toc{padding-inline-start:1.4rem;margin:.65rem 0 1.4rem;line-height:1.65}
+  .preview-toc li+li{margin-top:.4rem}
+  .catalogue-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2.5vw,32px)}
+  .catalogue-card{display:flex;flex-direction:column;border:1px solid rgba(100,89,75,.27);border-radius:12px;overflow:hidden;background:#fffdf8;color:#292620}
+  .catalogue-cover{display:grid;place-items:center;background:#ede8df;padding:24px}
+  .catalogue-cover img{display:block;width:100%;height:clamp(200px,25vw,310px);object-fit:contain}
+  .catalogue-body{padding:clamp(16px,2.4vw,26px);flex:1;display:flex;flex-direction:column;gap:.75rem;line-height:1.65}
+  .catalogue-body h3{font-size:1.23rem;line-height:1.35}
+  .catalogue-body .edition,.catalogue-author{margin:0;color:#565044}
+  .catalogue-actions{padding-top:.5rem;margin-top:auto}
+  .catalogue-actions small{display:block;margin-top:.55rem}
+  @media(max-width:850px){.catalogue-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media(max-width:560px){.catalogue-grid{grid-template-columns:1fr}.catalogue-cover img{height:280px}}
+
 </style>
 </head>
 <body>
@@ -386,9 +405,9 @@
   </a>
   <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
   <ul class="nav-links" id="navLinks">
-    <li><a href="#new-release">New Release</a></li>
+    <li><a href="#new-release">Coming Soon</a></li>
     <li><a href="#about">About</a></li>
-    <li><a href="#titles">First List</a></li>
+    <li><a href="#titles">Books</a></li>
     <li><a href="#process">Process</a></li>
     <li><a href="#submissions">Submissions</a></li>
   </ul>
@@ -403,57 +422,44 @@
     <div class="hero-inner">
       <span class="eyebrow">A New Independent Press — Est. 2026</span>
       <h1>Fiction and essays for readers who underline.</h1>
-      <p>Aorael Books is a brand-new Seoul press whose first title is already out — a practical guide to foreseeing the future with AI. Next up: voice-driven novels, essay collections, and literature in translation, edited to be reread.</p>
+      <p>Aorael Books is an independent press in Seoul. Explore our Korean and English books, from stories for young readers to practical guides on AI and the future.</p>
       <div class="hero-actions">
-        <a class="btn btn-solid" href="#new-release">Our First Title</a>
+        <a class="btn btn-solid" href="#titles">Explore Our Books</a>
         <a class="btn btn-ghost" href="#about">Read the Manifesto</a>
       </div>
     </div>
     <div class="scroll-cue"><span class="line"></span>Scroll</div>
   </section>
 
-  <section class="new-release" id="new-release">
+  <section class="new-release" id="new-release" lang="ko">
     <div class="wrap nr-grid">
-      <div class="nr-cover reveal">
-        <span class="nr-badge">Out Now</span>
-        <div class="cover-plate">
-          <img src="book-cover.jpg" alt="Book cover — How to Foresee the Future with AI by Wonju Hwangbo" width="683" height="1024" loading="eager" decoding="async"
-               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="cover-fallback">
-            <div>
-              <b>How to Foresee the Future with AI</b>
-              <span>Wonju Hwangbo · Aorael Books<br><br>(book-cover.jpg not found — upload it next to index.html)</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div class="nr-cover reveal"><div class="cover-plate"><img src="book-super-elnino.png" alt="또 슈퍼 엘니뇨? 표지" width="682" height="1024" decoding="async"></div></div>
       <div class="nr-body reveal">
-        <span class="kicker">First Title · New Release</span>
-        <h2>How to Foresee the Future with AI</h2>
-        <p class="nr-sub">A Practical Guide to Reading, Exploring, Choosing, and Shaping Tomorrow with Artificial Intelligence</p>
-        <p class="nr-author">by <strong>Wonju Hwangbo, Ph.D.</strong></p>
-        <blockquote class="nr-quote">"The future is not one. It never arrives fully formed — it first appears as a faint signal in the present, and it is made, little by little, by the questions we ask and the choices we make today."</blockquote>
-        <p class="nr-sub">A hands-on guide to futures thinking for the age of artificial intelligence — beyond the old dream of predicting tomorrow. Across ten chapters and five parts, Dr. Hwangbo shows how to read change, imagine many possible futures, and choose the one we want, together with AI. This edition is fully revised for the AI era, expanding the author's earlier book into a method for thinking with AI, not just about it.</p>
-        <ul class="nr-points">
-          <li>Read the signals of change that quietly announce the future</li>
-          <li>Use the core methods — horizon scanning, Delphi, scenario planning, backcasting, cross-impact analysis</li>
-          <li>Work with AI as a thinking partner while keeping human judgment</li>
-          <li>See how AI is reshaping work, learning, health, culture, and relationships</li>
-          <li>Watch AI, energy, and climate change one another's futures</li>
-          <li>Ask the governance question — who decides the future, and for whom</li>
-        </ul>
-        <!-- Price checked 12 Oct 2026: £7.55 on Amazon.co.uk — update manually if it changes -->
-        <div class="nr-meta">
-          <span>170 pages</span><span>English</span><span>10 chapters · 5 parts</span><span>34 figures &amp; diagrams</span><span>Kindle Edition</span><span>11 Oct 2026</span><span>ASIN B0HMMSHKNT</span>
-        </div>
-        <div class="nr-actions">
-          <a class="btn btn-solid" href="https://www.amazon.co.uk/dp/B0HMMSHKNT" target="_blank" rel="noopener">Buy on Amazon — £7.55</a>
-          <a class="btn btn-ghost" href="https://www.amazon.co.uk/dp/B0HMMSHKNT" target="_blank" rel="noopener">Read free with Kindle Unlimited</a>
-        </div>
-        <p class="nr-author-bio"><strong>About the author.</strong> Wonju Hwangbo, Ph.D. — author, futures-studies scholar, and CEO of Aorael. Dr. Hwangbo has taught futures studies at Ewha Womans University and works across AI strategy and technology policy.</p>
+        <span class="kicker" lang="en">First Title · New Release</span>
+        <p class="edition">2027년 1월 출간 예정</p>
+        <h2>또 슈퍼 엘니뇨?</h2>
+        <p class="nr-sub">기후의 경고, 우리의 선택</p>
+        <p class="nr-author"><strong>오재호</strong> 지음</p>
+        <p class="nr-sub">태평양 적도 부근의 바닷물 온도가 달라지면 왜 세계 곳곳의 날씨가 흔들릴까? 엘니뇨와 라니냐의 원리에서 출발해, 과거의 강력한 엘니뇨를 돌아보고 인공위성과 AI가 바다의 변화를 어디까지 읽을 수 있는지 살핀다. 더워지는 지구에서 한국과 세계가 무엇을 준비해야 할지도 함께 묻는다.</p>
+        <h3>차례 미리보기</h3>
+        <ol class="preview-toc">
+          <li><strong>태평양의 두 얼굴</strong> — 엘니뇨·라니냐가 생기는 원리와 ENSO의 작동 방식</li>
+          <li><strong>엘니뇨와 라니냐의 기록</strong> — 1982~1983년부터 주요 사건을 돌아보고 향후 가능성 살피기</li>
+          <li><strong>바다가 보내는 신호</strong> — 바닷속 관측, 인공위성, AI 예측의 가능성과 한계</li>
+          <li><strong>더워지는 지구, 우리의 대응</strong> — 슈퍼 엘니뇨가 세계와 한국에 미치는 영향과 대비</li>
+        </ol>
+        <h3>저자 소개</h3>
+        <p class="nr-author-bio">오재호는 부경대학교 명예교수이자 나노웨더 대표다. 서울대학교 기상학과를 졸업하고 미국 오리건주립대학교에서 대기과학 박사학위를 받았다. 기상청 기상연구소 예보연구실장과 한국기상학회장을 지냈으며, 2013년 과학기술훈장 도약장을 받았다.</p>
       </div>
     </div>
   </section>
+  <section id="titles" lang="ko"><div class="wrap">
+    <div class="section-head reveal"><span class="kicker" lang="en">Aorael Books · Catalogue</span><h2>아오라엘북스 책 소개</h2><p>아이의 첫 AI 친구 이야기부터, AI와 함께 미래를 탐색하는 한글판과 영문판까지.</p></div>
+    <div class="catalogue-grid">
+      <article class="catalogue-card reveal"><div class="catalogue-cover"><img src="book-promise-2.jpg" alt="약속할게요 2 — 거울 속 친구 표지" loading="lazy" decoding="async"></div><div class="catalogue-body"><p class="edition">한국어 · 어린이 이야기</p><h3>약속할게요 2 — 거울 속 친구</h3><p class="catalogue-author">황보원주 지음</p><p>써니의 화면 속 친구 미리는 무엇이든 도와주지만, 틀린 말도 자신 있게 하고 친구의 얼굴로 우스운 사진도 만든다. 아이가 AI의 말을 언제 확인하고, 무엇을 털어놓고, 남의 사진을 어디까지 써도 되는지 스스로 생각하게 하는 이야기다.</p><div class="catalogue-actions"><a class="btn btn-solid" href="https://ebook-product.kyobobook.co.kr/dig/epd/ebook/E000013839493" target="_blank" rel="noopener noreferrer">교보eBook 구매하기</a></div></div></article>
+      <article class="catalogue-card reveal"><div class="catalogue-cover"><img src="book-ai-futures-ko.png" alt="AI 시대, 미래를 어떻게 볼 것인가 표지" loading="lazy" decoding="async"></div><div class="catalogue-body"><p class="edition">한국어 · 미래학</p><h3>AI 시대, 미래를 어떻게 볼 것인가</h3><p class="catalogue-author">황보원주 지음</p><p>미래를 하나로 맞히기보다 여러 가능성을 살펴보고 우리가 원하는 미래를 선택하는 법을 다룬다. 변화의 신호를 찾는 환경스캐닝, 시나리오 기획, 원하는 미래에서 거꾸로 계획을 세우는 백캐스팅을 AI 실습과 함께 소개한다.</p><div class="catalogue-actions"><a class="btn btn-solid" href="https://bookbus.kr/b/9791122211009/" target="_blank" rel="noopener noreferrer">도서 정보 보기</a><small>교보eBook 구매 링크 확인 중</small></div></div></article>
+      <article class="catalogue-card reveal"><div class="catalogue-cover"><img src="book-cover.jpg" alt="How to Foresee the Future with AI 표지" loading="lazy" decoding="async"></div><div class="catalogue-body"><p class="edition">영문판 · Kindle</p><h3>How to Foresee the Future with AI</h3><p class="catalogue-author">Wonju Hwangbo</p><p>기존에 소개했던 영문판. AI를 미래를 맞히는 도구가 아니라 함께 질문하는 파트너로 삼아 일과 배움, 에너지와 기후의 변화를 탐색한다. 델파이, 시나리오 기획, 교차영향분석 등 미래탐색 방법도 다룬다.</p><div class="catalogue-actions"><a class="btn btn-solid" href="https://www.amazon.co.uk/dp/B0HMMSHKNT" target="_blank" rel="noopener noreferrer">Amazon 구매하기</a></div></div></article>
+    </div></div></section>
 
   <section class="about" id="about">
     <div class="wrap about-grid" id="about-grid">
@@ -465,29 +471,8 @@
       </div>
       <div class="stats reveal">
         <div class="stat"><b>2026</b><span>Founded</span></div>
-        <div class="stat"><b>1</b><span>First title out now — more in reading</span></div>
+        <div class="stat"><b>Books</b><span>Korean and English editions</span></div>
         <div class="stat"><b>Open</b><span>Currently acquiring for the next list</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="titles">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <span class="kicker">First List</span>
-        <h2>The shelf has its first spine.</h2>
-        <p>How to Foresee the Future with AI went live on 11 October 2026. We're reading for the books that will stand beside it — the shelf fills slowly, on purpose.</p>
-      </div>
-      <div class="coming-soon reveal">
-        <div class="coming-soon-art">
-          <div class="shelf" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
-        </div>
-        <div class="coming-soon-body">
-          <span class="kicker">Status</span>
-          <h3>One out, more in reading</h3>
-          <p>The first title is available on Amazon now. Everything else on this shelf is being decided the way we said — slowly, in the room with the author.</p>
-          <a class="btn btn-solid" href="#new-release">Meet the first title</a>
-        </div>
       </div>
     </div>
   </section>
@@ -554,8 +539,8 @@
           <div>
             <h4>Explore</h4>
             <ul>
-              <li><a href="#new-release">New Release</a></li>
-              <li><a href="#titles">First List</a></li>
+              <li><a href="#new-release">Coming Soon</a></li>
+              <li><a href="#titles">Books</a></li>
               <li><a href="#about">About</a></li>
               <li><a href="#process">Process</a></li>
               <li><a href="#submissions">Submissions</a></li>
